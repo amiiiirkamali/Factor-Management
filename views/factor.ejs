@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>صفحه مشخصات فاکتور</title>
+  <link href="https://fonts.googleapis.com/css?family=Vazirmatn" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "Vazirmatn", serif;
+      background: linear-gradient(to bottom, #f1ce21, #ebe158, #fff);
+      font-size: 14px;
+    }
+
+    .header-title {
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 50px;
+      margin-top: 20px;
+    }
+
+    .centered {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background-color: #f1f1f1;
+      color: #333;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .highlight {
+      text-align: center;
+      background-color: #f1ce21;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    @page {
+      size: landscape;
+    }
+
+    .seller-signature {
+      float: right;
+      font-size: 24px;
+    }
+
+    .buyer-signature {
+      float: left;
+      font-size: 24px;
+    }
+
+    .signatures {
+      clear: both;
+    }
+
+    .signatures .seller-signature,
+    .signatures .buyer-signature {
+      display: inline-block;
+      width: 45%;
+      margin: 10px;
+      text-align: center;
+    }
+
+    .signatures .buyer-signature {
+      float: right;
+    }
+
+    .button {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .button button {
+      background-color: #050270;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .button button:hover {
+      background-color: #070388;
+      transform: translateY(-3px);
+    }
+
+    .button button:active {
+      transform: translateY(1px);
+    }
+
+    /* Print styles */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      #invoice,
+      #invoice * {
+        visibility: visible;
+      }
+
+      #invoice {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+    }
+
+    .back-button {
+      padding: 10px 20px;
+      background-color: #ddd;
+      color: #000000;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      position: absolute;
+      top: 20px;
+      right: 10px;
+    }
+
+    /* Hide the default checkbox */
+    .custom-checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #ccc;
+      border-radius: 3px;
+      outline: none;
+      cursor: not-allowed;
+    }
+
+    .custom-checkbox:checked {
+      background-color: blue;
+      border-color: blue;
+      position: relative;
+    }
+
+    .custom-checkbox:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 3px;
+      height: 8px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header-title">
+    <a href="/" class="back-button">صفحه اصلی</a>
+    مشخصات فاکتور
+  </header>
+  <section class="wrapper" id="invoice">
+    <div class="container p-0">
+      <div class="centered">
+        <div class="card">
+          <div class="card-body">
+            <form role="form" method="get">
+              <div class="row">
+                <div class="col-12">
+                  <h1 class="card-title">پیش فاکتور رسمی</h1>
+                </div>
+                <div class="col-12">
+                  <p class="lead" style="text-align: left;">تاریخ: <%= factor.date %>
+                  </p>
+                  <p class="lead">شماره سریال: <%= factor.factorId %>
+                  </p>
+                </div>
+              </div>
+              <div class="row p-0">
+                <table class="table table-bordered table-primary">
+                  <thead>
+                    <tr>
+                      <th colspan="12" class="highlight">مشخصات فروشنده</th>
+                    </tr>
+                    <tr class="text-right">
+                      <th>نام شخص حقیقی/حقوقی</th>
+                      <td colspan="5" style="text-align: center;">
+                        <%= factor.seller_name %>
+                      </td>
+                      <th>شماره اقتصادی</th>
+                      <td colspan="3" style="text-align: center;">
+                        <%= factor.seller_economy_number %>
+                      </td>
+                    </tr>
+                    <tr class="text-right">
+                      <th>نشانی کامل</th>
+                      <td colspan="3" style="text-align: center;">
+                        <%= factor.seller_address %>
+                      </td>
+                      <th>شهر</th>
+                      <td colspan="2" style="text-align: center;">
+                        <%= factor.seller_city %>
+                      </td>
+                      <th>کشور</th>
+                      <td colspan="2" style="text-align: center;">
+                        <%= factor.seller_county %>
+                      </td>
+                      <th>کدپستی</th>
+                      <td colspan="2" style="text-align: center;">
+                        <%= factor.seller_postal_code %>
+                      </td>
+                    </tr>
+                    <tr class="text-right">
+                      <th>شماره موبایل</th>
+                      <td colspan="8" style="text-align: center;">
+                        <%= factor.seller_phone_number %>
+                      </td>
+                      <th>شناسه ملی</th>
+                      <td colspan="2" style="text-align: center;">
+                        <%= factor.seller_national_id %>
+                      </td>
+                    </tr>
+                    <tr class="highlight">
+                      <th colspan="12" class="highlight">مشخصات خریدار</th>
+                    </tr>
+                    <tr class="text-right">
+                      <th>نام شخص حقیقی/حقوقی</th>
+                      <td colspan="5" style="text-align: center;">
+                        <%= factor.customer_name %>
+                      </td>
+                      <th>شماره اقتصادی</th>
+                      <td colspan="3" style="text-align: center;">
+                        <%= factor.customer_economy_number %>
+                      </td>
+                      <th>شماره ثبت</th>
+                      <td colspan="2" style="text-align: center;">
+                        <%= factor.customer_registeration_number %>
+                      </td>
+                    </tr>
+                    <tr class="text-right">
+                      <th>نشانی کامل</th>
+                      <td colspan="3" style="text-align: center;">
+                        <%= factor.customer_address %>
+                      </td>
+                      <th>شهر</th>
+                      <td colspan="2" style="text-align: center;">
+                        <%= factor.customer_city %>
+                      </td>
+                      <th>کشور</th>
+                      <td colspan="2" style="text-align: center;">
+                        <%= factor.customer_county %>
+                      </td>
+                      <th>کدپستی</th>
+                      <td colspan="2" style="text-align: center;">
+                        <%= factor.customer_postal_code %>
+                      </td>
+                    </tr>
+                    <tr class="text-right">
+                      <th>شماره موبایل</th>
+                      <td colspan="8" style="text-align: center;">
+                        <%= factor.customer_phone_number %>
+                      </td>
+                      <th>شناسه ملی</th>
+                      <td colspan="2" style="text-align: center;">
+                        <%= factor.customer_national_id %>
+                      </td>
+                    </tr>
+                    <tr class="bg-warning">
+                      <th colspan="12" class="highlight">مشخصات کالا یا خدمات مورد معامله</th>
+                    </tr>
+                    <tr>
+                      <th colspan="1" style="text-align: center;">شماره</th>
+                      <th colspan="2" style="text-align: center;">شرح کالا یا خدمات</th>
+                      <th colspan="2" style="text-align: center;">تعداد</th>
+                      <th colspan="2" style="text-align: center;">قیمت واحد</th>
+                      <th colspan="2" style="text-align: center;">مبلغ کل بدون تخفیف</th>
+                      <th colspan="2" style="text-align: center;">درصد تخفیف</th>
+                      <th colspan="2" style="text-align: center;">توضیحات</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% factor.products.forEach((product, index)=> { %>
+                      <tr>
+                        <td colspan="1" style="text-align: center;">
+                          <%= index + 1 %>
+                        </td>
+                        <td colspan="2" style="text-align: center;">
+                          <%= product.name %>
+                        </td>
+                        <td colspan="2" style="text-align: center;">
+                          <%= product.quantity %>
+                        </td>
+                        <td colspan="2" style="text-align: center;">
+                          <%= product.price %>
+                        </td>
+                        <td colspan="2" style="text-align: center;">
+                          <%= product.price * product.quantity %>
+                        </td>
+                        <td colspan="2" style="text-align: center;">
+                          <%= product.discount %>
+                        </td>
+                        <td colspan="2" style="text-align: center;">
+                          <%= factor.description %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-right bg-white" colspan="1" style="text-align: center;">جمع کل:</td>
+                        <td colspan="11" style="text-align: center;">
+                          <%= factor.totalPrice %>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th colspan="6" style="text-align: center;">نقدی</th>
+                        <th colspan="6" style="text-align: center;">غیرنقدی</th>
+                      </tr>
+                      <tr>
+                        <td colspan="6" style="text-align: center;">
+                          <input type="checkbox" class="custom-checkbox" disabled
+                            <%=factor.payment_type==='debit_payment' ? 'checked' : '' %>>
+                        </td>
+                        <td colspan="6" style="text-align: center;">
+                          <input type="checkbox" class="custom-checkbox" disabled
+                            <%=factor.payment_type==='nondebit_payment' ? 'checked' : '' %>>
+                        </td>
+                      </tr>
+
+                      <% }) %>
+
+                  </tbody>
+                </table>
+              </div>
+            </form>
+            <div class="row" style="padding-top: 30px; padding-bottom: 50px">
+              <div class="col-6 text-right">
+                <h3 class="card-title">مهر و امضاء فروشنده:</h3>
+              </div>
+              <br><br>
+              <div class="col-6 text-right">
+                <h3 class="card-title">مهر و امضاء خریدار:</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="button">
+    <button onclick="printInvoice()">چاپ و دانلود</button>
+  </div>
+  <script>
+    function printInvoice() {
+      window.print();
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>صفحه فاکتور</title>
+    <style>
+      body,html {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #f1ce21, #ebe158, #fff);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      header {
+        background: transparent;
+        color: rgb(0, 0, 0);
+        padding: 20px;
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+      }
+      .main-content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        padding: 100px;
+        flex-grow: 1;
+      }
+
+      .box {
+        background-size: cover;
+        background-position: center;
+        border-radius: 30px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        height: 330px; 
+        width: 90%; 
+        color: #ffffff; 
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      }
+
+      .box-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .box button,
+      button {
+        background-color: #070388;
+        color: white;
+        border: none;
+        padding: 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .box button:hover {
+        background-color: #2621c0;
+        transform: scale(1.05);
+      }
+
+      .box button:active {
+        background-color: #2621c0;
+      }
+
+      .box:nth-child(1) {
+        background-image: url('./image/invo.png');
+      }
+      .box:nth-child(2) {
+        background-image: url('./image/prodList.png');
+      }
+      .box:nth-child(3) {
+        background-image: url('./image/invoList.png');
+      }
+      .box:nth-child(4) {
+        background-image: url('./image/prod.jpg');
+      }
+      
+      .button-login {
+        width: 150px;
+        align-self: flex-end;
+        margin-left: 50px;
+        top: 20%;
+      }
+
+      .email-button {
+        position: absolute;
+        align-self: flex-start;
+        right: 0;
+        top: 20%;
+        transform: translateY(-50%);
+        background-color: #070388;
+        border: none;
+        color: #ffffff;
+        padding: 15px 30px;
+        font-size: 1rem;
+        margin-right: 50px;
+        cursor: pointer;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <header>صفحه فاکتور</header>
+
+    <script>
+      const loggedIn = document.cookie.includes('logged_in=true');
+      if (!loggedIn) {
+        document.write(
+          `<button onclick="window.location.href='/login'" class="button-login">ثبت نام / ورود</button>`
+        );
+      } else {
+        const email = document.cookie
+          .split('; ')
+          .find((row) => row.startsWith('email='))
+          .split('=')[1];
+        document.write(
+          `<div class="email-button" >${email}</div><button onclick="document.cookie='logged_in=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'; window.location.href='/login'" class="button-login">خروج</button>`
+        );
+      }
+    </script>
+    <div class="main-content">
+      <div class="box">
+        <div class="box-title"></div>
+        <script>
+          if (!loggedIn) {
+            document.write(`
+              <button onclick="window.location.href='/login'">
+                ثبت نام / ورود
+              </button>`);
+          } else {
+            document.write(`
+              <button onclick="window.location.href='/add_factor'">
+                افزودن فاکتور
+              </button>`);
+          }
+        </script>
+      </div>
+      <div class="box">
+        <div class="box-title"></div>
+        <script>
+          if (!loggedIn) {
+            document.write(`
+              <button onclick="window.location.href='/login'">
+                ثبت نام / ورود
+              </button>`);
+          } else {
+            document.write(`
+              <button onclick="window.location.href='/factors'">
+                فاکتور ها
+              </button>`);
+          }
+        </script>
+      </div>
+      <div class="box">
+        <div class="box-title"></div>
+        <script>
+          if (!loggedIn) {
+            document.write(`
+              <button onclick="window.location.href='/login'">
+                ثبت نام / ورود
+              </button>`);
+          } else {
+            document.write(`
+              <button onclick="window.location.href='/add_product'">
+                افزودن محصول
+              </button>`);
+          }
+        </script>
+      </div>
+      <div class="box">
+        <div class="box-title"></div>
+        <script>
+          if (!loggedIn) {
+            document.write(`
+              <button onclick="window.location.href='/login'">
+                ثبت نام / ورود
+              </button>`);
+          } else {
+            document.write(`
+              <button onclick="window.location.href='/products'">
+                محصولات
+              </button>`);
+          }
+        </script>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+[
+    {
+        "name": "customer1",
+        "economy_number": "123",
+        "registeration_number": "123",
+        "address": "address1",
+        "county": "county1",
+        "city": "city1",
+        "postal_code": "123",
+        "national_id": "123",
+        "phone_number": "123"
+    },
+    {
+        "name": "customer2",
+        "economy_number": "456",
+        "registeration_number": "456",
+        "address": "address2",
+        "county": "county2",
+        "city": "city2",
+        "postal_code": "456",
+        "national_id": "456",
+        "phone_number": "456"
+    },
+    {
+        "name": "customer3",
+        "economy_number": "789",
+        "registeration_number": "789",
+        "address": "address3",
+        "county": "county3",
+        "city": "city3",
+        "postal_code": "789",
+        "national_id": "789",
+        "phone_number": "789"
+    },
+    {
+        "name": "customer4",
+        "economy_number": "7890",
+        "registeration_number": "7890",
+        "address": "address4",
+        "county": "county4",
+        "city": "city4",
+        "postal_code": "7890",
+        "national_id": "7890",
+        "phone_number": "7890"
+    },
+    {
+        "name": "customer5",
+        "economy_number": "5678",
+        "registeration_number": "5678",
+        "address": "address5",
+        "county": "county5",
+        "city": "city5",
+        "postal_code": "5678",
+        "national_id": "5678",
+        "phone_number": "5678"
+    },
+    {
+        "name": "customer6",
+        "economy_number": "9012",
+        "registeration_number": "9012",
+        "address": "address6",
+        "county": "county6",
+        "city": "city6",
+        "postal_code": "9012",
+        "national_id": "9012",
+        "phone_number": "9012"
+    },
+    {
+        "name": "customer7",
+        "economy_number": "3456",
+        "registeration_number": "3456",
+        "address": "address7",
+        "county": "county7",
+        "city": "city7",
+        "postal_code": "3456",
+        "national_id": "3456",
+        "phone_number": "3456"
+    }
+    ,{
+        "name": "customer8",
+        "economy_number": "8765",
+        "registeration_number": "8765",
+        "address": "address8",
+        "county": "county8",
+        "city": "city8",
+        "postal_code": "8765",
+        "national_id": "8765",
+        "phone_number": "8765"
+    },
+    {
+        "name": "customer9",
+        "economy_number": "4321",
+        "registeration_number": "4321",
+        "address": "address9",
+        "county": "county9",
+        "city": "city9",
+        "postal_code": "4321",
+        "national_id": "4321",
+        "phone_number": "4321"
+    },
+    {
+        "name": "customer10",
+        "economy_number": "1928",
+        "registeration_number": "1928",
+        "address": "address10",
+        "county": "county10",
+        "city": "city10",
+        "postal_code": "1928",
+        "national_id": "1928",
+        "phone_number": "1928"
+    }
+]

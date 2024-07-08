@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نمایش محصول</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f1ce21, #ebe158, #fff);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: transparent;
+            color: rgb(0, 0, 0);
+            padding: 20px;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .product-details {
+            background: linear-gradient(145deg, #e0e0e0, #c0c0c0);
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        .detail-item {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .detail-item span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        نمایش محصول
+    </header>
+    <div class="main-content">
+        <div class="product-details">
+            <h1>جزئیات محصول</h1>
+            <div class="detail-item"><span>کد محصول:</span> <%= product.product_id %></div>
+            <div class="detail-item"><span>نام:</span> <%= product.name %></div>
+            <div class="detail-item"><span>قیمت:</span> <%= product.price %></div>
+            <div class="detail-item"><span>واحد:</span> <%= product.unit %></div>
+            <div class="detail-item"><span>توضیحات:</span> <%= product.description %></div>
+        </div>
+    </div>
+</body>
+</html>

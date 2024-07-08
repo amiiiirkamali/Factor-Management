@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشخصات فاکتورها</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f1ce21, #ebe158, #fff);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: transparent;
+            color: rgb(0, 0, 0);
+            padding: 20px;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .table-container {
+            background: linear-gradient(145deg, #e0e0e0, #c0c0c0);
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #f1ce21;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .product-table th, .product-table td {
+            padding: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .product-table th {
+            background-color: #ebe158;
+            color: #000000;
+        }
+        .back-button {
+            padding: 10px 20px;
+            background-color: #ddd;
+            color: #000000;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.75rem;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            right: 10px;            
+        }       
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="back-button">صفحه اصلی</a>
+        مشخصات فاکتورها
+    </header>
+    <div class="main-content">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>شماره</th>
+                        <th>مشتری</th>
+                        <th>فروشنده</th>
+                        <th>محصولات</th>
+                        <th>قیمت کل</th>
+                        <th>توضیحات</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <% factors.forEach(factor => { %>
+                    <tr onclick="window.location.href='/factor/<%= factor.factorId %>'">
+                        <td><%= factor.factorId %></td>
+                        <td><%= factor.customer_name %></td>
+                        <td><%= factor.seller_name %></td>
+                        <td>
+                            <table class="product-table">
+                                <thead>
+                                    <tr>
+                                        <th>نام محصول</th>
+                                        <th>تعداد</th>
+                                        <th>قیمت</th>
+                                        <th>تخفیف</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% factor.products.forEach(product => { %>
+                                    <tr>
+                                        <td><%= product.name %></td>
+                                        <td><%= product.quantity %></td>
+                                        <td><%= product.price %></td>
+                                        <td><%= product.discount %></td>
+                                    </tr>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td><%= factor.totalPrice %></td>
+                        <td><%= factor.description %></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

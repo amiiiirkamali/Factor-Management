@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محصولات</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f1ce21, #ebe158, #fff);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+        header {
+            background: transparent;
+            color: rgb(0, 0, 0);
+            padding: 20px;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+            position: relative;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .table-container {
+            background: linear-gradient(145deg, #e0e0e0, #c0c0c0);
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #f1ce21;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .action-buttons a {
+            margin: 0 5px;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: rgb(0, 0, 0);
+        }
+        
+        .view-button {
+            background-color: #f1ce21;
+        }
+        
+        .edit-button {
+            background-color: #f1ce21;
+        }
+        
+        .delete-button {
+            background-color: #f1ce21;
+        }
+        .back-button {
+            padding: 10px 20px;
+            background-color: #ddd;
+            color: #000000;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.75rem;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            right: 10px;
+        }
+    </style>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="/" class="back-button">صفحه اصلی</a>
+        محصولات
+    </header>
+    <div class="main-content">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>کد</th>
+                        <th>نام</th>
+                        <th>قیمت</th>
+                        <th>واحد</th>
+                        <th>توضیحات</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% products.forEach(product => { %>
+                    <tr>
+                        <td><%= product.product_id %></td>
+                        <td><%= product.name %></td>
+                        <td><%= product.price %></td>
+                        <td><%= product.unit %></td>
+                        <td><%= product.description %></td>
+                        <td class="action-buttons">
+                            <a href="/view/<%= product.product_id %>" class="view-button"><i class="fas fa-eye"></i></a>
+                            <a href="/edit/<%= product.product_id %>" class="edit-button"><i class="fas fa-edit"></i></a>
+                            <a href="/delete/<%= product.product_id %>" class="delete-button" onclick="return confirm('آیا از حذف این محصول اطمینان دارید؟');"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

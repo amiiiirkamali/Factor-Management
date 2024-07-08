@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ویرایش محصول</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f1ce21, #ebe158, #fff);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: transparent;
+            color: rgb(0, 0, 0);
+            padding: 20px;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .edit-form {
+            background: linear-gradient(145deg, #e0e0e0, #c0c0c0);
+            border-radius: 30px;
+            padding: 40px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 1000px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"], textarea, select {
+            padding: 12px; 
+            margin-bottom: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: border-color 0.3s; 
+        }
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+            border-color: #2621c0; 
+        }
+        input[type="submit"] {
+            padding: 12px 24px;
+            font-size: 18px;
+            background-color: #2621c0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #1d198f;
+            transform: scale(1.05); 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        ویرایش محصول
+    </header>
+    <div class="main-content">
+        <div class="edit-form">
+            <form action="/edit/<%= product.product_id %>" method="POST">
+                <label for="name">نام</label>
+                <input type="text" id="name" name="name" value="<%= product.name %>" required>
+                
+                <label for="price">قیمت</label>
+                <input type="number" id="price" name="price" value="<%= product.price %>" required>
+                
+                <label for="unit">واحد</label>
+                <select id="unit" name="unit" required>
+                    <option value="کیلوگرم" <%= product.unit === "کیلوگرم" ? "selected" : "" %>>کیلوگرم</option>
+                    <option value="گرم" <%= product.unit === "گرم" ? "selected" : "" %>>گرم</option>
+                    <option value="لیتر" <%= product.unit === "لیتر" ? "selected" : "" %>>لیتر</option>
+                    <option value="میلی لیتر" <%= product.unit === "میلی لیتر" ? "selected" : "" %>>میلی لیتر</option>
+                    <option value="عدد" <%= product.unit === "عدد" ? "selected" : "" %>>عدد</option>
+                    <option value="متر" <%= product.unit === "متر" ? "selected" : "" %>>متر</option>
+                </select>
+                
+                <label for="description">توضیحات</label>
+                <textarea id="description" name="description" required><%= product.description %></textarea>
+                
+                <input type="submit" value="ذخیره">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

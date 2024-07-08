@@ -1,0 +1,102 @@
+[
+    {
+      "name": "Seller 1",
+      "economy_number": "ECO1234567891",
+      "national_id": "NID1234567891",
+      "address": "Address 1",
+      "county": "County 1",
+      "city": "City 1",
+      "postal_code": "12456987",
+      "phone_number": "101234567891"
+    },
+    {
+      "name": "Seller 2",
+      "economy_number": "ECO1234567892",
+      "national_id": "NID1234567892",
+      "address": "Address 2",
+      "county": "County 2",
+      "city": "City 2",
+      "postal_code": "23456789",
+      "phone_number": "201234567892"
+    },
+    {
+      "name": "Seller 3",
+      "economy_number": "ECO1234567893",
+      "national_id": "NID1234567893",
+      "address": "Address 3",
+      "county": "County 3",
+      "city": "City 3",
+      "postal_code": "34567890",
+      "phone_number": "301234567893"
+    },
+    {
+      "name": "Seller 4",
+      "economy_number": "ECO1234567894",
+      "national_id": "NID1234567894",
+      "address": "Address 4",
+      "county": "County 4",
+      "city": "City 4",
+      "postal_code": "45678901",
+      "phone_number": "401234567894"
+    },
+    {
+      "name": "Seller 5",
+      "economy_number": "ECO1234567895",
+      "national_id": "NID1234567895",
+      "address": "Address 5",
+      "county": "County 5",
+      "city": "City 5",
+      "postal_code": "56789012",
+      "phone_number": "501234567895"
+    },
+    {
+      "name": "Seller 6",
+      "economy_number": "ECO1234567896",
+      "national_id": "NID1234567896",
+      "address": "Address 6",
+      "county": "County 6",
+      "city": "City 6",
+      "postal_code": "67890123",
+      "phone_number": "601234567896"
+    },
+    {
+      "name": "Seller 7",
+      "economy_number": "ECO1234567897",
+      "national_id": "NID1234567897",
+      "address": "Address 7",
+      "county": "County 7",
+      "city": "City 7", 
+      "postal_code": "78901234",
+      "phone_number": "701234567897"
+    },
+    {
+      "name": "Seller 8",
+      "economy_number": "ECO1234567898",
+      "national_id": "NID1234567898",
+      "address": "Address 8",
+      "county": "County 8",
+      "city": "City 8",
+      "postal_code": "89012345",
+      "phone_number": "801234567898"
+    },
+    {
+      "name": "Seller 9",
+      "economy_number": "ECO1234567899",
+      "national_id": "NID1234567899",
+      "address": "Address 9",
+      "county": "County 9",
+      "city": "City 9",
+      "postal_code": "90123456",
+      "phone_number": "901234567899"
+    },
+    {
+      "name": "Seller 10",
+      "economy_number": "ECO1234567890",
+      "national_id": "NID1234567890",
+      "address": "Address 10",
+      "county": "County 10",
+      "city": "City 10",
+      "postal_code": "01234567",
+      "phone_number": "001234567890"
+    }
+  ]

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اضافه کردن فاکتور</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f1ce21, #ebe158, #fff);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        header {
+            background: transparent;
+            color: rgb(0, 0, 0);
+            padding: 20px;
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        footer {
+            background: transparent;
+            color: rgb(0, 0, 0);
+            padding: 10px;
+            text-align: center;
+            font-size: 30px;
+            margin-top: auto;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background: linear-gradient(145deg, #e0e0e0, #2621c0);
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .box {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #000000;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #070388;
+            color: white;
+            border: none;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #2621c0;
+            transform: scale(1.05);
+        }
+
+        button:active {
+            background-color: #2621c0;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        #addProductBtn {
+            padding: 10px;
+        }
+
+        .productRow {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+
+        .priceDisplay,
+        .totalPriceDisplay {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            background-color: #ddd;
+            color: #000000;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.75rem;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="/" class="back-button">صفحه اصلی</a>
+        اضافه کردن فاکتور
+    </header>
+    <div class="main-content">
+        <div class="form-container">
+            <form id="factorForm" action="/factors" method="POST">
+                <div class="box">
+                    <div class="box">
+
+                        <label for="">شماره سریال:</label>
+                        <input type="number" name="serial_number" id="serial_number" readonly>
+                        <br>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', () => {
+                                fetch('/factors_json')
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        const factorIds = data.map(factor => factor.factorId);
+                                        const maxFactorId = Math.max(...factorIds);
+                                        document.getElementById('serial_number').value = maxFactorId;
+                                    })
+                                    .catch(error => console.error('Error fetching factors:', error));
+                            });
+                        </script>
+
+
+                        <label for="seller_name">نام فروشنده:</label>
+                        <select id="seller_name" name="seller_name" required>
+                            <option value="">انتخاب فروشنده...</option>
+                        </select>
+                        <br>
+                        <script>
+                            fetch('/sellers_json')
+                                .then(response => response.json())
+                                .then(data => {
+                                    const selectElement = document.getElementById('seller_name');
+                                    data.sellers.forEach(seller => {
+                                        const option = document.createElement('option');
+                                        option.value = seller.name;
+                                        option.text = seller.name;
+                                        selectElement.appendChild(option);
+                                    });
+                                    selectElement.addEventListener('change', function () {
+                                        const selectedSeller = data.sellers.find(seller => seller.name === this.value);
+                                        document.getElementById('seller_economy_number').value = selectedSeller.economy_number;
+                                        document.getElementById('seller_national_id').value = selectedSeller.national_id;
+                                        document.getElementById('seller_address').value = selectedSeller.address;
+                                        document.getElementById('seller_county').value = selectedSeller.county;
+                                        document.getElementById('seller_city').value = selectedSeller.city;
+                                        document.getElementById('seller_postal_code').value = selectedSeller.postal_code;
+                                        document.getElementById('seller_phone_number').value = selectedSeller.phone_number;
+                                    });
+                                })
+                                .catch(error => console.error('Error:', error));
+                        </script>
+                        <label for="seller_economy_number">شماره اقتصادی فروشنده:</label>
+                        <input type="text" name="seller_economy_number" id="seller_economy_number" required>
+                        <br>
+                        <label for="seller_national_id">شناسه ملی فروشنده:</label>
+                        <input type="text" name="seller_national_id" id="seller_national_id" required>
+                        <br>
+                        <label for="seller_address">آدرس فروشنده:</label>
+                        <input type="text" name="seller_address" id="seller_address" required>
+                        <br>
+                        <label for="seller_county">شهرستان فروشنده:</label>
+                        <input type="text" name="seller_county" id="seller_county" required>
+                        <br>
+                        <label for="seller_city">شهر فروشنده:</label>
+                        <input type="text" name="seller_city" id="seller_city" required>
+                        <br>
+                        <label for="seller_postal_code">کد پستی فروشنده:</label>
+                        <input type="text" name="seller_postal_code" id="seller_postal_code" required>
+                        <br>
+                        <label for="seller_phone_number">شماره تلفن فروشنده:</label>
+                        <input type="text" name="seller_phone_number" id="seller_phone_number" required>
+                    </div>
+                    <br><br><br>
+                    <div class="box">
+                        <label for="customer_name">نام مشتری:</label>
+                        <select id="customer_name" name="customer_name" required>
+                            <option value="">انتخاب مشتری...</option>
+
+                        </select>
+                        <br>
+                        <script>
+                            fetch('/customers_json')
+                                .then(response => response.json())
+                                .then(data => {
+                                    const selectElement = document.getElementById('customer_name');
+                                    data.customers.forEach(customer => {
+                                        const option = document.createElement('option');
+                                        option.value = customer.name;
+                                        option.text = customer.name;
+                                        selectElement.appendChild(option);
+                                    });
+                                    selectElement.addEventListener('change', function () {
+                                        const selectedCustomer = data.customers.find(customer => customer.name === this.value);
+                                        document.getElementById('customer_economy_number').value = selectedCustomer.economy_number;
+                                        document.getElementById('customer_registeration_number').value = selectedCustomer.registeration_number;
+                                        document.getElementById('customer_address').value = selectedCustomer.address;
+                                        document.getElementById('customer_county').value = selectedCustomer.county;
+                                        document.getElementById('customer_city').value = selectedCustomer.city;
+                                        document.getElementById('customer_postal_code').value = selectedCustomer.postal_code;
+                                        document.getElementById('customer_national_id').value = selectedCustomer.national_id;
+                                        document.getElementById('customer_phone_number').value = selectedCustomer.phone_number;
+                                    });
+                                })
+                                .catch(error => console.error('Error:', error));
+                        </script>
+                        <label for="customer_economy_number">شماره اقتصادی مشتری:</label>
+                        <input type="text" name="customer_economy_number" id="customer_economy_number" required>
+                        <br>
+                        <label for="customer_national_id">شناسه ملی مشتری:</label>
+                        <input type="text" name="customer_national_id" id="customer_national_id" required>
+                        <br>
+                        <label for="customer_registeration_number">شماره ثبت مشتری:</label>
+                        <input type="text" name="customer_registeration_number" id="customer_registeration_number"
+                            required>
+                        <br>
+                        <label for="customer_address">آدرس مشتری:</label>
+                        <input type="text" name="customer_address" id="customer_address" required>
+                        <br>
+                        <label for="customer_county">شهرستان مشتری:</label>
+                        <input type="text" name="customer_county" id="customer_county" required>
+                        <br>
+                        <label for="customer_city">شهر مشتری:</label>
+                        <input type="text" name="customer_city" id="customer_city" required>
+                        <br>
+                        <label for="customer_postal_code">کد پستی مشتری:</label>
+                        <input type="text" name="customer_postal_code" id="customer_postal_code" required>
+                        <br>
+                        <label for="customer_phone_number">شماره تلفن مشتری:</label>
+                        <input type="text" name="customer_phone_number" id="customer_phone_number" required>
+                    </div>
+                    <br><br><br>
+                    <div class="box">
+                        <div id="productsContainer"></div>
+                        <button type="button" id="addProductBtn" onclick="addProduct()">افزودن محصول</button>
+                    </div>
+                    <br><br><br>
+                    <div class="box">
+                        <label for="description">توضیحات:</label>
+                        <br>
+                        <textarea id="description" name="description" rows="4"></textarea>
+                        <br>
+                        <label for="payment_type">نوع پرداخت:</label>
+                        <br>
+                        <input type="radio" name="payment_type" id="debit_payment" value="debit_payment" required>
+                        <label for="debit_payment">پرداخت نقدی</label>
+                        <br>
+                        <input type="radio" name="payment_type" id="nondebit_payment" value="nondebit_payment" required>
+                        <label for="nondebit_payment">پرداخت غیرنقدی</label>
+                        <br>
+                        <button type="submit">ثبت فاکتور</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        let productData = [];
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/products_json')
+                .then(response => response.json())
+                .then(data => {
+                    productData = data.products;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        function addProduct() {
+            const productContainer = document.createElement('div');
+            productContainer.classList.add('productRow');
+
+            const productLabel = document.createElement('label');
+            productLabel.textContent = 'نام محصول:';
+            productContainer.appendChild(productLabel);
+
+            const productSelect = document.createElement('select');
+            productSelect.name = 'product_name[]';
+            productSelect.required = true;
+            productSelect.onchange = updatePriceInput;
+
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.text = 'انتخاب محصول...';
+            productSelect.appendChild(defaultOption);
+
+            productData.forEach(product => {
+                const option = document.createElement('option');
+                option.value = product.name;
+                option.text = product.name;
+                option.dataset.price = product.price;
+                option.dataset.unit = product.unit;
+                productSelect.appendChild(option);
+            });
+            productContainer.appendChild(productSelect);
+
+            const unitLabel = document.createElement('label');
+            unitLabel.textContent = 'واحد محصول:';
+            productContainer.appendChild(unitLabel);
+
+            const unitInput = document.createElement('input');
+            unitInput.type = 'text';
+            unitInput.name = 'product_unit[]';
+            unitInput.disabled = true;
+            productContainer.appendChild(unitInput);
+
+            const quantityLabel = document.createElement('label');
+            quantityLabel.textContent = 'تعداد محصول:';
+            productContainer.appendChild(quantityLabel);
+
+            const quantityInput = document.createElement('input');
+            quantityInput.type = 'number';
+            quantityInput.name = 'product_quantity[]';
+            quantityInput.min = 1;
+            quantityInput.required = true;
+            quantityInput.oninput = updateTotalPrice;
+            productContainer.appendChild(quantityInput);
+
+            const priceInput = document.createElement('input');
+            priceInput.type = 'hidden';
+            priceInput.name = 'product_price[]';
+            priceInput.required = true;
+            productContainer.appendChild(priceInput);
+
+            const discountLabel = document.createElement('label');
+            discountLabel.textContent = 'تخفیف (%):';
+            productContainer.appendChild(discountLabel);
+
+            const discountInput = document.createElement('input');
+            discountInput.type = 'number';
+            discountInput.name = 'product_discount[]';
+            discountInput.id = 'product_discount';
+            discountInput.min = 0;
+            discountInput.max = 100;
+            discountInput.oninput = updateTotalPrice;
+            productContainer.appendChild(discountInput);
+
+            const priceDisplay = document.createElement('div');
+            priceDisplay.classList.add('priceDisplay');
+            productContainer.appendChild(priceDisplay);
+
+            const totalPriceDisplay = document.createElement('div');
+            totalPriceDisplay.classList.add('totalPriceDisplay');
+            productContainer.appendChild(totalPriceDisplay);
+
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.textContent = 'حذف محصول';
+            removeButton.onclick = () => productContainer.remove();
+            productContainer.appendChild(removeButton);
+
+            document.getElementById('productsContainer').appendChild(productContainer);
+        }
+
+        function updatePriceInput(event) {
+            const selectElement = event.target;
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const price = selectedOption.dataset.price;
+            const unit = selectedOption.dataset.unit;
+
+            const productRow = selectElement.parentElement;
+            const priceInput = productRow.querySelector('input[type="hidden"]');
+            priceInput.value = price;
+
+            const unitInput = productRow.querySelector('input[name="product_unit[]"]');
+            unitInput.value = unit;
+
+            const priceDisplay = productRow.querySelector('.priceDisplay');
+            priceDisplay.textContent = `قیمت واحد: ${price} `;
+            updateTotalPrice(event);
+        }
+
+        function updateTotalPrice(event) {
+            const productRow = event.target.parentElement;
+            const quantityInput = productRow.querySelector('input[name="product_quantity[]"]');
+            const priceInput = productRow.querySelector('input[name="product_price[]"]');
+            const discountInput = productRow.querySelector('input[name="product_discount[]"]');
+            const totalPriceDisplay = productRow.querySelector('.totalPriceDisplay');
+
+            const quantity = quantityInput.value;
+            const price = priceInput.value;
+            const discount = discountInput.value;
+
+            let totalPrice = quantity * price;
+            if (discount && discount > 0) {
+                const discountAmount = (totalPrice * discount) / 100;
+                totalPrice -= discountAmount;
+            }
+
+            totalPriceDisplay.textContent = `قیمت کل: ${totalPrice} `;
+        }
+    </script>
+</body>
+
+</html>
